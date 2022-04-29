@@ -1,7 +1,5 @@
-import java.io.IOException;
-import java.util.Scanner;
 
-import javax.swing.plaf.TreeUI;
+import java.util.Scanner;
 
 public class FormattedInput {
 
@@ -17,50 +15,100 @@ public class FormattedInput {
         String[] formatArray = format.split(" ");
         Object[] result = new Object[formatArray.length];
 
+        int isReaded = 0;
         while (true) {
+            isReaded = 1;
             Scanner inputScanner = new Scanner(System.in);
 
             for (int i = 0; i < formatArray.length; i++) {
                 switch (formatArray[i]) {
-                    case "d":
+                    case "%d":
                         if (inputScanner.hasNextInt()) {
                             result[i] = inputScanner.nextInt();
-                        } else continue;
+                            break;
+
+                        } else
+                            isReaded = 0;
+                        break;
+
                     case "%f":
                         if (inputScanner.hasNextFloat()) {
                             result[i] = inputScanner.nextFloat();
-                        } else continue;
-                    case ("%s"):
+                            break;
+
+                        } else
+                            isReaded = 0;
+                        break;
+
+                    case "%s":
+                        if (inputScanner.hasNext()) {
+                            String temp = inputScanner.next();
+                            result[i] = temp;
+                            break;
+                        } else
+                            isReaded = 0;
+                        break;
                     case "%c":
-                        if (inputScanner.hasNextLine()) {
-                            if(inputScanner.nextLine().length() == 1) {
-                                System.out.println("CHAR");
-                            } else System.out.println("cock");
-                        }
+                        if (inputScanner.hasNext()) {
+                            String temp = inputScanner.next();
+                            if (temp.length() > 1) {
+                                isReaded = 0;
+                                break;
+                            } else
+                                result[i] = temp;
+                            break;
+
+                        } else
+                            isReaded = 0;
+                        break;
                 }
             }
+
+            if (isReaded != 1) {
+                System.out.println("Incorrect input. Try again");
+                continue;
+            } else
+                inputScanner.close();
             break;
         }
-        // if (formatArray.length != inputArray.length) {
-        //     System.out.println("\n Number of arguments passed does not equal the amount of formattypes");
-        //     inputScanner.close();
-        //     inputArray = null;
-        //     formatArray = null;
-        //     result = null;
-        //     this.scanf(format);
-        // }
-        // for (int i = 0; i < inputArray.length; i++) {
+        return result;
+    }
 
-        // }
-        // switch(type) {
-        // case "%d":
-        // }
-        // for(int i = 0; i < totalCharacters; i++) {
-        // int val1 = s_name.nextInt();
-        // double val3 = s_name.nextDouble();
-        // String name = s_name.nextLine();
-        // char ch = s_name.nextLine().charAt(0);
-        // }
+    Object[] sscanf(String format, String in) {
+        String[] formatArray = format.split(" ");
+        String[] inputArray = in.split(" ");
+        Object[] result = new Object[formatArray.length];
+
+        if (formatArray.length != inputArray.length)
+            return result;
+        for (int i = 0; i < formatArray.length; i++) {
+            switch (formatArray[i]) {
+                case "%d":
+                    try {
+                        result[i] = Integer.parseInt(inputArray[i]);
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Incorrect input: " + e);
+                        return result;
+                    }
+                case "%f":
+                    try {
+                        result[i] = Float.parseFloat(inputArray[i]);
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Incorrect input: " + e);
+                        return result;
+                    }
+                case "%s":
+                    result[i] = inputArray[i];
+                    break;
+                case "%c":
+                    if(inputArray[i].length() > 1) {
+                        System.out.println("Incorrect input: char consists of 1 letter");
+                        return result;
+                    } else result[i] = inputArray[i];
+            }
+        }
         return result;
     }
 }
