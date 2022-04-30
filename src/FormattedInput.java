@@ -1,4 +1,5 @@
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class FormattedInput {
@@ -11,7 +12,21 @@ public class FormattedInput {
     // %s --- строка
     // %c --- символ
 
+    // Object[] scanf(String format) {
+    //     long startTime = System.nanoTime();
+    //     Scanner sc = new Scanner(System.in);
+    //     Object[] result = null;
+    //     if(sc.hasNextLine())
+    //         result = sscanf(format, sc.nextLine());
+    //     else
+    //         System.out.println("Incorrect input.");
+    //     sc.close();
+    //     System.out.println("ELAPSED TIME: " + (System.nanoTime() - startTime));
+    //     return result;
+    // }
+
     Object[] scanf(String format) {
+        long startTime = System.nanoTime();
         String[] formatArray = format.split(" ");
         Object[] result = new Object[formatArray.length];
 
@@ -71,6 +86,7 @@ public class FormattedInput {
                 inputScanner.close();
             break;
         }
+         System.out.println("ELAPSED TIME: " + (System.nanoTime() - startTime));
         return result;
     }
 
