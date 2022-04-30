@@ -29,7 +29,7 @@ public class FormattedInput {
                         result[i] = Integer.parseInt(inputArray[i]);
                         break;
                     } catch (Exception e) {
-                        System.out.println("Incorrect input: " + e);
+                        System.out.println("Incorrect input " + e);
                         return result;
                     }
                 case "%f":
@@ -37,7 +37,7 @@ public class FormattedInput {
                         result[i] = Float.parseFloat(inputArray[i]);
                         break;
                     } catch (Exception e) {
-                        System.out.println("Incorrect input: " + e);
+                        System.out.println("Incorrect input " + e);
                         return result;
                     }
                 case "%s":
