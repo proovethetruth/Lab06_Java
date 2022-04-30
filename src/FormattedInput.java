@@ -2,16 +2,13 @@
 import java.util.Scanner;
 
 public class FormattedInput {
-
-    FormattedInput() {}
+    boolean errorFlag = true;
 
     Object[] scanf(String format) {
         Scanner sc = new Scanner(System.in);
         Object[] result = null;
-        if(sc.hasNextLine())
+        while(errorFlag)
             result = sscanf(format, sc.nextLine());
-        else
-            System.out.println("Incorrect input.");
         sc.close();
         return result;
     }
@@ -21,8 +18,10 @@ public class FormattedInput {
         String[] inputArray = in.split(" ");
         Object[] result = new Object[formatArray.length];
 
-        if (formatArray.length != inputArray.length)
+        if (formatArray.length != inputArray.length) {
+            System.out.println("Incorrect input. Not enough / too many arguments passed.");
             return result;
+        }
         for (int i = 0; i < formatArray.length; i++) {
             switch (formatArray[i]) {
                 case "%d":
@@ -51,6 +50,7 @@ public class FormattedInput {
                     } else result[i] = inputArray[i];
             }
         }
+        errorFlag = false;
         return result;
     }
 }

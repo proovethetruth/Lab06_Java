@@ -1,10 +1,10 @@
 
 public class App {
     public static void main(String[] args) throws Exception {
+        // System.out.println("Working Directory = " + System.getProperty("user.dir"));
         FormattedInput a = new FormattedInput();
-
         System.out.println("\nInput: ");
-        Object[] arr = a.scanf("%c %s");
+        Object[] arr = a.scanf("%s %c %s %d %f %c %d");
 
         StringBuilder str = new StringBuilder();
         str.append("Recieved Input: ");
@@ -12,12 +12,7 @@ public class App {
             str.append(element + " ");
         System.out.println(str);
 
-        // Object[] arr2 = a.sscanf("%c %s", "s hello");
-
-        // StringBuilder str2 = new StringBuilder();
-        // str2.append("Recieved Input: ");
-        // for(Object element : arr2)
-        //     str2.append(element + " ");
-        // System.out.println(str2);
+        EncodingConverter converterObject = new EncodingConverter();
+        converterObject.encodingConverter(args[0], args[1], args[2], args[3]);
     }
 }
