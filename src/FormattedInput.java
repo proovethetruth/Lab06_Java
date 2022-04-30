@@ -22,12 +22,13 @@ public class FormattedInput {
     //         System.out.println("Incorrect input.");
     //     sc.close();
     //     System.out.println("ELAPSED TIME: " + (System.nanoTime() - startTime));
-    //     return result;
+    //     return result;wha
     // }
 
     Object[] scanf(String format) {
         long startTime = System.nanoTime();
         String[] formatArray = format.split(" ");
+        System.out.println("nit");;
         Object[] result = new Object[formatArray.length];
 
         int isReaded = 0;
